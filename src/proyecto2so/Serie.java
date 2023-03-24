@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package proyecto2so;
-
+import java.util.Random;
 /**
  *
  * @author Roy
@@ -12,10 +12,9 @@ public class Serie {
     private String nombre;
     private int id;
     private int prioridad;
-    private int duracionCapitulo;
+    private int duracion;
     private int contador;
-    private boolean enColaRefuerzo;
-    private boolean quality;
+    private boolean calidad;
 
     public Serie() {
 
@@ -25,39 +24,84 @@ public class Serie {
         return id;
     }
     
+    public void setId() {
+        Random random = new Random();
+        this.id = random.nextInt(1000);
+    }
+    
     public String getNombre() {
         return nombre;
     }
     
-    public boolean getQuality() {
-        return quality;
+    public void setNombre() {
+        Random random = new Random();
+        String[] nombres = {"Daenerys", "Cersei", "Jon", "Arya", "Sansa"};
+        int indice = random.nextInt(nombres.length);
+        this.nombre = nombres[indice] + '-' + getId();
+    }
+    
+    public boolean getCalidad() {
+        return calidad;
+    }
+    
+    public void setCalidad() {
+        Random random = new Random();
+        int intro = random.nextInt(100);
+        int inicio = random.nextInt(100);
+        int cierre = random.nextInt(100);
+        int credito = random.nextInt(100);
+        
+        if (intro <= 75 && inicio <= 84  && cierre <= 80 && credito <= 85){
+            calidad = true;
+        }
     }
 
     public int getPrioridad() {
         return prioridad;
     }
     
-    public void setPrioridad(int prioridad) {
+    public void setPrioridad() {
         this.prioridad = prioridad;
     }
+    
+    public void primerPrioridad() {
+        Random random = new Random();
+        if (duracion < 60) {
+            this.prioridad = 3;
+        } else if (duracion >= 60 && duracion <= 90) {
+            this.prioridad = 2;
+        } else {
+            this.prioridad = 1;
+        }
+    }
 
-    public int getDuracionCapitulo() {
-        return duracionCapitulo;
+    public int getDuracion() {
+        return duracion;
+    }
+    
+    public void setDuracion() {
+        Random random = new Random();
+        this.duracion = random.nextInt(100);
     }
 
     public int getContador() {
         return contador;
     }
 
-    public void setContador(int contador) {
-        this.contador = contador;
+    public void sumContador() {
+        if (contador < 8)
+        this.contador++;
+    }
+    
+    public void restContador() {
+        this.contador = 0;
     }
 
-    public boolean isEnColaRefuerzo() {
-        return enColaRefuerzo;
-    }
-
-    public void setEnColaRefuerzo(boolean enColaRefuerzo) {
-        this.enColaRefuerzo = enColaRefuerzo;
+    public void crearSerie() {
+        setId();
+        setDuracion();
+        setCalidad();
+        setNombre();
+        primerPrioridad();
     }
 }

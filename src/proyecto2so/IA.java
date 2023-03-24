@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package proyecto2so;
+import proyecto2so.Serie;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
