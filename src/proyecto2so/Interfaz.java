@@ -66,7 +66,7 @@ public class Interfaz extends javax.swing.JFrame {
         Empezar = new javax.swing.JButton();
         Peleando = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
-        colaRefuerzo = new javax.swing.JTextArea();
+        colaDeRefuerzo = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         Tiempo = new javax.swing.JTextField();
         Series = new javax.swing.JTextField();
@@ -153,12 +153,12 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        colaRefuerzo.setEditable(false);
-        colaRefuerzo.setBackground(new java.awt.Color(102, 102, 102));
-        colaRefuerzo.setColumns(20);
-        colaRefuerzo.setForeground(new java.awt.Color(255, 255, 255));
-        colaRefuerzo.setRows(5);
-        jScrollPane5.setViewportView(colaRefuerzo);
+        colaDeRefuerzo.setEditable(false);
+        colaDeRefuerzo.setBackground(new java.awt.Color(102, 102, 102));
+        colaDeRefuerzo.setColumns(20);
+        colaDeRefuerzo.setForeground(new java.awt.Color(255, 255, 255));
+        colaDeRefuerzo.setRows(5);
+        jScrollPane5.setViewportView(colaDeRefuerzo);
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
@@ -384,7 +384,7 @@ public class Interfaz extends javax.swing.JFrame {
     public static javax.swing.JTextField Peleando;
     private javax.swing.JTextField Series;
     private javax.swing.JTextField Tiempo;
-    public static javax.swing.JTextArea colaRefuerzo;
+    public static javax.swing.JTextArea colaDeRefuerzo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

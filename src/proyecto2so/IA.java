@@ -134,7 +134,7 @@ public abstract class IA extends SwingWorker<Void, Void> {
         Interfaz.Nivel1.setText(mensaje1);
         Interfaz.Nivel2.setText(mensaje2);
         Interfaz.Nivel3.setText(mensaje3);
-        Interfaz.colaRefuerzo.setText(mensajeRef);
+        Interfaz.colaDeRefuerzo.setText(mensajeRef);
         Interfaz.Ganadores.setText(mensajeWin);
     }
     
@@ -184,11 +184,11 @@ public abstract class IA extends SwingWorker<Void, Void> {
         
         //Seleccionador de pelea
         
-        if (!colaRefuerzo.isEmpty()){
-            serie = colaRefuerzo.poll();
-        }
         if (!nivel1.isEmpty()) {
             serie = nivel1.poll();
+        }
+        else if (!colaRefuerzo.isEmpty()){
+            serie = colaRefuerzo.poll();
         }
         else if (!nivel2.isEmpty() && nivel1.isEmpty()) {
             serie = nivel2.poll();
@@ -261,7 +261,7 @@ public abstract class IA extends SwingWorker<Void, Void> {
                             System.out.print("Ganador " + serie2.getNombre() + "\n");
                             //System.out.print("Perdedor " + serie1.getNombre() + "\n");
                         }
-                    } else if (pGanador > 40 && pGanador <= 67) {
+                    } else {if (pGanador > 40 && pGanador <= 67) {
                             serie1.setPrioridad(3);
                             serie2.setPrioridad(3);
                             encolar(serie1);
@@ -270,7 +270,7 @@ public abstract class IA extends SwingWorker<Void, Void> {
                         } else {
                             colaRefuerzo.add(serie1);
                             colaRefuerzo.add(serie2);
-
+                    }
                         
                     }}
             //Final del dia
