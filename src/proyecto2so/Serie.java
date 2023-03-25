@@ -40,7 +40,7 @@ public class Serie {
         this.nombre = nombres[indice] + '-' + getId();
     }
     
-    public boolean getCalidad() {
+    public boolean isCalidad() {
         return calidad;
     }
     

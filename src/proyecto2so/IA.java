@@ -176,6 +176,20 @@ public abstract class IA extends SwingWorker<Void, Void> {
             //Thread.sleep(velocidad);
             Thread.sleep(1000);
             
+            if (serie1.isCalidad() && !serie2.isCalidad()){
+                ganadores.add(serie1);
+                //serie2.setPrioridad(3);
+                //encolar(serie2);
+                System.out.print("Ganador " + serie1.getNombre() + "\n");
+                //System.out.print("Perdedor " + serie2.getNombre() + "\n");
+            } else if (!serie1.isCalidad() && serie2.isCalidad()) {
+                ganadores.add(serie2);
+                //serie1.setPrioridad(3);
+                //encolar(serie1);
+                System.out.print("Ganador " + serie2.getNombre() + "\n");
+                //System.out.print("Perdedor " + serie1.getNombre() + "\n");
+            } else {
+            
             int pGanador = random.nextInt(100);
             
             if (pGanador <= 40) {
@@ -190,7 +204,7 @@ public abstract class IA extends SwingWorker<Void, Void> {
                         } else {
                             ganadores.add(serie2);
                             serie1.setPrioridad(3);
-                            
+                            encolar(serie1);
                             System.out.print("Ganador " + serie2.getNombre() + "\n");
                             //System.out.print("Perdedor " + serie1.getNombre() + "\n");
                         }
@@ -205,7 +219,7 @@ public abstract class IA extends SwingWorker<Void, Void> {
                             colaRefuerzo.add(serie2);
 
                         
-                    }
+                    }}
             //Final del dia
             if (contadorDias % 2 == 0) {
                 if (random.nextInt(100) <= 70) {
@@ -218,7 +232,7 @@ public abstract class IA extends SwingWorker<Void, Void> {
             contadorDias++;
            
             //terminar programa
-            if (nivel1.isEmpty()&& nivel2.isEmpty() && nivel3.isEmpty() && colaRefuerzo.isEmpty()) {
+            if (nivel1.isEmpty()&& nivel2.isEmpty() && nivel3.isEmpty()) {
                 System.out.print("Terminado!" + '\n');
                 Interfaz.Peleando.setText("Terminado!");
                         mutex.release();
