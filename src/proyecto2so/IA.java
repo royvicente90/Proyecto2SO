@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package proyecto2so;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import proyecto2so.Serie;
 import proyecto2so.Interfaz;
 import java.util.LinkedList;
@@ -81,6 +86,17 @@ public abstract class IA extends SwingWorker<Void, Void> {
         colaRefuerzo.remove(serie);
     }
     
+    public void archivo() {
+        ganadores = this.ganadores;
+        String mensaje = "";
+        for (Serie serie : ganadores) {
+            mensaje += serie.getNombre() + "\n";
+        }
+        TXT txt = new TXT(mensaje);
+        Thread hilo = new Thread(txt);
+        hilo.start();
+    }
+    
     //Actualizador de tablas
     public void actualizarNiveles() {
         nivel1 = this.nivel1;
@@ -121,6 +137,42 @@ public abstract class IA extends SwingWorker<Void, Void> {
         Interfaz.colaRefuerzo.setText(mensajeRef);
         Interfaz.Ganadores.setText(mensajeWin);
     }
+    
+    //Actualizador de contadores
+    public void actualizarContadores() {
+        nivel1 = this.nivel1;
+        nivel2 = this.nivel2;
+        nivel3 = this.nivel3;
+        colaRefuerzo = this.colaRefuerzo;
+        
+        if (!nivel2.isEmpty()){
+        for (Serie serie : nivel2) {
+           if (serie.getContador() < 8) {
+            serie.sumContador(); 
+           } else {
+               serie.restContador();
+               serie.setPrioridad(1);
+               encolar(serie);
+               nivel2.remove(serie);
+           }
+        }}
+        if (!nivel3.isEmpty()){
+        for (Serie serie : nivel3) {
+            if (serie.getContador() < 8) {
+            serie.sumContador(); 
+           } else {
+               serie.restContador();
+               serie.setPrioridad(2);
+               encolar(serie);
+               nivel3.remove(serie);
+           }
+        }}
+        /*
+        if (!colaRefuerzo.isEmpty()){
+        for (Serie serie : colaRefuerzo) {
+            mensajeRef += serie.getNombre() + "\n";
+        }}*/
+    }
 
     public Serie seleccionar() {
         nivel1 = this.nivel1;
@@ -158,11 +210,12 @@ public abstract class IA extends SwingWorker<Void, Void> {
         int velocidad = dia * (1000 * (10 + 4));
         try {
             while (true) {
-            mutex.acquire();
         
         Serie serie1 = seleccionar();
         Serie serie2 = seleccionar();
+        //actualizarContadores();
         actualizarNiveles();
+        
         
         int aleatorio = random.nextInt(100);
         //pelea
@@ -235,10 +288,9 @@ public abstract class IA extends SwingWorker<Void, Void> {
             if (nivel1.isEmpty()&& nivel2.isEmpty() && nivel3.isEmpty()) {
                 System.out.print("Terminado!" + '\n');
                 Interfaz.Peleando.setText("Terminado!");
-                        mutex.release();
+                archivo();
                         break;
             } else {
-            mutex.release();
             }
             }
             }

@@ -311,6 +311,7 @@ public class Interfaz extends javax.swing.JFrame {
              
              ia.execute();
              
+             
             } catch (NumberFormatException e) {
         System.out.print("Error! No se introdujo un valor numerico entero");
         }
