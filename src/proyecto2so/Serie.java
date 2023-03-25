@@ -9,12 +9,12 @@ import java.util.Random;
  * @author Roy
  */
 public class Serie {
-    private String nombre;
-    private int id;
-    private int prioridad;
-    private int duracion;
-    private int contador;
-    private boolean calidad;
+    public String nombre;
+    public int id;
+    public int prioridad;
+    public int duracion;
+    public int contador;
+    public boolean calidad;
 
     public Serie() {
 
@@ -60,7 +60,7 @@ public class Serie {
         return prioridad;
     }
     
-    public void setPrioridad() {
+    public void setPrioridad(int prioridad) {
         this.prioridad = prioridad;
     }
     
