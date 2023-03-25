@@ -213,7 +213,7 @@ public abstract class IA extends SwingWorker<Void, Void> {
         
         Serie serie1 = seleccionar();
         Serie serie2 = seleccionar();
-        actualizarContadores();
+        //actualizarContadores();
         actualizarNiveles();
         
         
