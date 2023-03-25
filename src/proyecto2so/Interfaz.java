@@ -53,9 +53,9 @@ public class Interfaz extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Nivel1 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        Nivel2 = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
         Nivel3 = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        Nivel2 = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -86,19 +86,19 @@ public class Interfaz extends javax.swing.JFrame {
         Nivel1.setRows(5);
         jScrollPane1.setViewportView(Nivel1);
 
-        Nivel2.setEditable(false);
-        Nivel2.setBackground(new java.awt.Color(102, 102, 102));
-        Nivel2.setColumns(20);
-        Nivel2.setForeground(new java.awt.Color(255, 255, 255));
-        Nivel2.setRows(5);
-        jScrollPane2.setViewportView(Nivel2);
-
         Nivel3.setEditable(false);
         Nivel3.setBackground(new java.awt.Color(102, 102, 102));
         Nivel3.setColumns(20);
         Nivel3.setForeground(new java.awt.Color(255, 255, 255));
         Nivel3.setRows(5);
-        jScrollPane3.setViewportView(Nivel3);
+        jScrollPane2.setViewportView(Nivel3);
+
+        Nivel2.setEditable(false);
+        Nivel2.setBackground(new java.awt.Color(102, 102, 102));
+        Nivel2.setColumns(20);
+        Nivel2.setForeground(new java.awt.Color(255, 255, 255));
+        Nivel2.setRows(5);
+        jScrollPane3.setViewportView(Nivel2);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
@@ -173,7 +173,7 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        Series.setText("10");
+        Series.setText("20");
         Series.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SeriesActionPerformed(evt);

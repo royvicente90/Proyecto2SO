@@ -25,6 +25,7 @@ public abstract class IA extends SwingWorker<Void, Void> {
     private Random random;
     int dia;
     private Semaphore mutex = new Semaphore(1);
+    int contadorDias = 0;
 
     public IA() {
         this.nivel1 = new LinkedList<>();
@@ -146,8 +147,14 @@ public abstract class IA extends SwingWorker<Void, Void> {
         return serie;
     }
         
+    //Funcion Pelea
     @Override
     protected Void doInBackground() throws Exception {
+        nivel1 = this.nivel1;
+        nivel2 = this.nivel2;
+        nivel3 = this.nivel3;
+        colaRefuerzo = this.colaRefuerzo;
+        ganadores = this.ganadores;
         int velocidad = dia * (1000 * (10 + 4));
         try {
             while (true) {
@@ -176,26 +183,40 @@ public abstract class IA extends SwingWorker<Void, Void> {
                         //tenemos ganador
                         if (pGanador <= 20) {
                             ganadores.add(serie1);
-                            nivel3.add(serie2);
+                            serie2.setPrioridad(3);
+                            encolar(serie2);
                             System.out.print("Ganador " + serie1.getNombre() + "\n");
-                            System.out.print("Perdedor " + serie2.getNombre() + "\n");
+                            //System.out.print("Perdedor " + serie2.getNombre() + "\n");
                         } else {
                             ganadores.add(serie2);
-                            nivel3.add(serie1);
+                            serie1.setPrioridad(3);
+                            
                             System.out.print("Ganador " + serie2.getNombre() + "\n");
-                            System.out.print("Perdedor " + serie1.getNombre() + "\n");
+                            //System.out.print("Perdedor " + serie1.getNombre() + "\n");
                         }
-                    } else {
-                        if (pGanador > 40 && pGanador <= 67) {
-                            nivel3.add(serie1);
-                            nivel3.add(serie2);
+                    } else if (pGanador > 40 && pGanador <= 67) {
+                            serie1.setPrioridad(3);
+                            serie2.setPrioridad(3);
+                            encolar(serie1);
+                            encolar(serie2);
 
                         } else {
                             colaRefuerzo.add(serie1);
                             colaRefuerzo.add(serie2);
 
-                        }
+                        
                     }
+            //Final del dia
+            if (contadorDias % 2 == 0) {
+                if (random.nextInt(100) <= 70) {
+                    Serie serie = new Serie();
+                    serie.crearSerie();
+                    System.out.print("Creado: " + serie.getNombre() + "\n");
+                    encolar(serie);
+                }
+            }
+            contadorDias++;
+           
             //terminar programa
             if (nivel1.isEmpty()&& nivel2.isEmpty() && nivel3.isEmpty() && colaRefuerzo.isEmpty()) {
                 System.out.print("Terminado!" + '\n');

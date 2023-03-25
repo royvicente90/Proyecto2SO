@@ -60,6 +60,10 @@ public class Serie {
         return prioridad;
     }
     
+    public void setPrioridad(int prioridad) {
+        this.prioridad = prioridad;
+    }
+    
     public void primerPrioridad() {
         Random random = new Random();
         if (duracion < 60) {
