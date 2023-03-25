@@ -151,9 +151,9 @@ public abstract class IA extends SwingWorker<Void, Void> {
             serie.sumContador(); 
            } else {
                serie.restContador();
+               desencolar(serie);
                serie.setPrioridad(1);
                encolar(serie);
-               nivel2.remove(serie);
            }
         }}
         if (!nivel3.isEmpty()){
@@ -162,9 +162,9 @@ public abstract class IA extends SwingWorker<Void, Void> {
             serie.sumContador(); 
            } else {
                serie.restContador();
+               desencolar(serie);
                serie.setPrioridad(2);
                encolar(serie);
-               nivel3.remove(serie);
            }
         }}
         /*
@@ -213,7 +213,7 @@ public abstract class IA extends SwingWorker<Void, Void> {
         
         Serie serie1 = seleccionar();
         Serie serie2 = seleccionar();
-        //actualizarContadores();
+        actualizarContadores();
         actualizarNiveles();
         
         
