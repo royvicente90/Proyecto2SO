@@ -80,6 +80,7 @@ public abstract class IA extends SwingWorker<Void, Void> {
         colaRefuerzo.remove(serie);
     }
     
+    //Actualizador de tablas
     public void actualizarNiveles() {
         nivel1 = this.nivel1;
         nivel2 = this.nivel2;
@@ -186,18 +187,10 @@ public abstract class IA extends SwingWorker<Void, Void> {
                         }
                     } else {
                         if (pGanador > 40 && pGanador <= 67) {
-
-                            //Volveran a pelear
-                            serie1.setPrioridad(3);
-                            serie2.setPrioridad(3);
                             nivel3.add(serie1);
                             nivel3.add(serie2);
 
                         } else {
-                            
-                            //Se van a refuerzo
-                            serie1.setPrioridad(0);
-                            serie2.setPrioridad(0);
                             colaRefuerzo.add(serie1);
                             colaRefuerzo.add(serie2);
 
