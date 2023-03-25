@@ -13,7 +13,7 @@ public class Serie {
     public int id;
     public int prioridad;
     public int duracion;
-    public int contador;
+    public int contador = 0;
     public boolean calidad;
 
     public Serie() {
@@ -89,7 +89,6 @@ public class Serie {
     }
 
     public void sumContador() {
-        if (contador < 8)
         this.contador++;
     }
     
@@ -99,6 +98,7 @@ public class Serie {
 
     public void crearSerie() {
         setId();
+        restContador();
         setDuracion();
         setCalidad();
         setNombre();

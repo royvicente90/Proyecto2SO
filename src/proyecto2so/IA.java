@@ -3,11 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package proyecto2so;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import proyecto2so.Serie;
 import proyecto2so.Interfaz;
 import java.util.LinkedList;
@@ -99,6 +94,8 @@ public abstract class IA extends SwingWorker<Void, Void> {
     
     //Actualizador de tablas
     public void actualizarNiveles() {
+        try {
+            mutex.acquire();
         nivel1 = this.nivel1;
         nivel2 = this.nivel2;
         nivel3 = this.nivel3;
@@ -136,24 +133,37 @@ public abstract class IA extends SwingWorker<Void, Void> {
         Interfaz.Nivel3.setText(mensaje3);
         Interfaz.colaDeRefuerzo.setText(mensajeRef);
         Interfaz.Ganadores.setText(mensajeWin);
-    }
+        
+        mutex.release();
+    } catch (InterruptedException ex) {
+            Logger.getLogger(IA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
     
     //Actualizador de contadores
     public void actualizarContadores() {
+        try {
+        mutex.acquire();
+        
         nivel1 = this.nivel1;
         nivel2 = this.nivel2;
         nivel3 = this.nivel3;
         colaRefuerzo = this.colaRefuerzo;
-        
+        boolean repNivel2 = false;
+        boolean repNivel3 = false;
+        while (!repNivel2 && !repNivel3) {
         if (!nivel2.isEmpty()){
         for (Serie serie : nivel2) {
            if (serie.getContador() < 8) {
             serie.sumContador(); 
            } else {
+               
                serie.restContador();
                desencolar(serie);
                serie.setPrioridad(1);
                encolar(serie);
+               repNivel2 = true;
+               break;
            }
         }}
         if (!nivel3.isEmpty()){
@@ -165,15 +175,21 @@ public abstract class IA extends SwingWorker<Void, Void> {
                desencolar(serie);
                serie.setPrioridad(2);
                encolar(serie);
+               repNivel3 = true;
+               break;
            }
-        }}
+        }}}
         /*
         if (!colaRefuerzo.isEmpty()){
         for (Serie serie : colaRefuerzo) {
             mensajeRef += serie.getNombre() + "\n";
         }}*/
+        mutex.release();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(IA.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
+        
     public Serie seleccionar() {
         nivel1 = this.nivel1;
         nivel2 = this.nivel2;
@@ -214,6 +230,7 @@ public abstract class IA extends SwingWorker<Void, Void> {
         Serie serie1 = seleccionar();
         Serie serie2 = seleccionar();
         //actualizarContadores();
+        actualizarContadores();
         actualizarNiveles();
         
         
@@ -269,7 +286,9 @@ public abstract class IA extends SwingWorker<Void, Void> {
 
                         } else {
                             colaRefuerzo.add(serie1);
+                            serie1.setCalidad();
                             colaRefuerzo.add(serie2);
+                            serie2.setCalidad();
                     }
                         
                     }}
@@ -285,7 +304,7 @@ public abstract class IA extends SwingWorker<Void, Void> {
             contadorDias++;
            
             //terminar programa
-            if (nivel1.isEmpty()&& nivel2.isEmpty() && nivel3.isEmpty()) {
+            if (nivel3.isEmpty()) {
                 System.out.print("Terminado!" + '\n');
                 Interfaz.Peleando.setText("Terminado!");
                 archivo();
